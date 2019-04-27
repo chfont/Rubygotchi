@@ -1,25 +1,37 @@
-#class definition of rubygotchi
+#class definition of rubygotchib
+require "tco"
+require_relative "minigames/minigameA"
 
 class Rubygotchi
   def initialize(s)
+    @lastInit = Time.now.to_i
     @name = s
     @age = 0;
     @fullness = 10;
     @happiness = 5;
+    @lastFedCheck = Time.now.to_i
+    @lastPlayed = Time.now.to_i
   end
 
   def display
-    puts("My name is #{@name}")
-    puts("I am #{@age} days old")
-    puts("My happiness is #{@happiness}")
-    puts("My fullness is #{@fullness}")
+    print("My name is ")
+    puts "#{@name}".fg("#70ffb5")
+    print("I am")
+    print " #{@age} ".fg("#70ffb5")
+    puts "days old"
+    print "My happiness is "
+    puts "#{@happiness}".fg("#70ffb5")
+    print ("My fullness is ")
+    puts "#{@fullness}".fg("#70ffb5")
     puts("")
   end
 
   def play
+    rythmGame
     if (@happiness < 10)
       @happiness += 1
     end
+    @lastPlayed = Time.now.to_i
     puts("Happiness increased to #{@happiness}")
     puts("")
   end
@@ -28,106 +40,65 @@ class Rubygotchi
     if (@fullness < 10)
       @fullness += 1
     end
+  @lastFedCheck = Time.now.to_i
   puts("Fullness increased to #{@fullness}")
   puts("")
   end
 
-  def setAge(i)
+  #Getter and Setter methods
+
+  def lastInit()
+    return @lastInit
+  end
+
+  def age=(i)
     @age = i
   end
 
-  def setHappiness(i)
+  def happiness=(i)
     @happiness = i
   end
 
-  def setFullness(i)
+  def fullness=(i)
     @fullness = i
   end
 
-  def getAge()
+  def age()
     return @age
   end
 
-  def getName()
+  def name()
     return @name
   end
 
-  def getHappiness()
+  def happiness()
     return @happiness
   end
 
-  def getFullness()
+  def fullness()
     return @fullness
   end
 
-end
-
-def initFromFile(file)
-  f = File.open(file, "r")
-  name = f.gets.chomp
-  age = f.gets.chomp.to_i
-  happiness = f.gets.chomp.to_i
-  fullness = f.gets.chomp.to_i
-  t = Rubygotchi.new(name)
-  t.setAge(age)
-  t.setHappiness(happiness)
-  t.setFullness(fullness)
-  f.close()
-  return t
-end
-
-def saveToFile(file, t)
-  f = File.open(file, "w")
-  f.write(t.getName())
-  f.write("\n")
-  f.write(t.getAge())
-  f.write("\n")
-  f.write(t.getHappiness())
-  f.write("\n")
-  f.write(t.getFullness())
-  f.write("\n")
-end
-
-def listCommands()
-  puts("q - quit")
-  puts("h - help")
-  puts("f - feed")
-  puts("p - play")
-  puts("s - status")
-  puts("")
-end
-
-if (File.exist?("rubygotchi0.txt"))
-  test = initFromFile("rubygotchi0.txt")
-  test.display()
-else
-  f = File.new("rubygotchi0.txt", "w")
-  f.close()
-  puts("Enter a name for your rubygotchi: ")
-  rname = gets.chomp
-  test = Rubygotchi.new(rname)
-  test.display()
-  test.play()
-  test.display()
-  saveToFile("rubygotchi0.txt", test)
-end
-
-
-puts("Enter a command(h to see all commands):")
-s = gets.chomp
-while (s != "q")
-  case s
-  when "h"
-    listCommands()
-  when "f"
-    test.feed()
-  when "p"
-    test.play()
-  when "s"
-    test.display()
-  else
-    puts("Invalid command. Enter 'h' to see all commands")
+  def lastFedCheck()
+    return @lastFedCheck
   end
-  puts("Enter a command(h to see all commands):")
-  s = gets.chomp
+  def lastPlayed()
+    return @lastPlayed
+  end
+  def lastInit=(i)
+    @lastInit = i
+  end
+  def lastFedCheck=(i)
+    @lastFedCheck = i
+  end
+  def lastPlayed=(i)
+    @lastPlayed = i
+  end
+  def lastAged=(i)
+    @lastAged = i
+  end
+  def lastAged()
+    return @lastAged
+  end
+
 end
