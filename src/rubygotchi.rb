@@ -27,9 +27,10 @@ class Rubygotchi
   end
 
   def play
-    rythmGame
+    res = rythmGame
     if (@happiness < 10)
-      @happiness += 1
+      @happiness += res
+      @happiness = [@happiness, 10].min
     end
     @lastPlayed = Time.now.to_i
     puts("Happiness increased to #{@happiness}")

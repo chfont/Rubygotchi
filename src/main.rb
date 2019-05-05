@@ -80,6 +80,12 @@ else
   saveToFile("rubygotchi0.txt", test)
 end
 
+Signal.trap("INT") do
+  #Terminate, saving data first
+  saveToFile("rubygotchi0.txt", test)
+  Kernel::exit
+end
+
 puts "Enter a command(h to see all commands):".fg("#4254b5")
 $stdin.flush
 s = gets.chomp

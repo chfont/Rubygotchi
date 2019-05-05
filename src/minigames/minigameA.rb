@@ -68,7 +68,6 @@ end
 def rythmGame
 
   score  = 0
-  needed = 15
   maxMistakes = 5
   mistakes = 0
 
@@ -134,4 +133,5 @@ def rythmGame
     clear
   end
   close_screen
+  return [score/10, 1].max
 end
