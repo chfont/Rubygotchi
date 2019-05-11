@@ -14,6 +14,7 @@ class Rubygotchi
   end
 
   def display
+    puts("Status: ".fg("#4254b5"))
     print("My name is ")
     puts "#{@name}".fg("#70ffb5")
     print("I am")

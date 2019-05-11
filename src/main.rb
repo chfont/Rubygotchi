@@ -59,8 +59,15 @@ def listCommands()
   puts("h - help")
   puts("f - feed")
   puts("p - play")
-  puts("s - status")
   puts("")
+end
+
+def clearScreen()
+  if RUBY_PLATFORM =~ /win32|win64|\.NET|windows|cygwin|mingw32/i
+    system('cls')
+  else
+    system('clear')
+  end
 end
 
 
@@ -90,6 +97,7 @@ puts "Enter a command(h to see all commands):".fg("#4254b5")
 $stdin.flush
 s = gets.chomp
 while (s != "q")
+  clearScreen()
   case s
   when "h"
     listCommands()
@@ -97,22 +105,14 @@ while (s != "q")
     test.feed()
   when "p"
     test.play()
-  when "s"
-    test.display()
   else
     puts("Invalid command. Enter 'h' to see all commands")
   end
-
-  sleep(2)
-
-  #If windows, use cls to clear window. Else, use clear
-  if RUBY_PLATFORM =~ /win32|win64|\.NET|windows|cygwin|mingw32/i
-    system('cls')
-  else
-    system('clear')
-  end
+  sleep(1.5)
+  test.display()
   puts "Enter a command(h to see all commands):".fg("#4254b5")
   s = gets.chomp
+
 
 end
 
